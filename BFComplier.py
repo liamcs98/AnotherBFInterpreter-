@@ -4,14 +4,15 @@ dataPoints = []
 BFProgram = ""
 CurrentPosition = 0
 indexIntoString = 0
+fileName = ""
 
 def createArrayOfData():
 	for x in range(30000):
 		dataPoints.append(0)
 	#print(dataPoints)
 
-def parseBFProgram():
-	file = open("BFTestProgram.txt", "r")
+def parseBFProgram(filename):
+	file = open(filename, "r")
 	global BFProgram
 	for line in file:
 		for element in line:
@@ -73,8 +74,9 @@ def meatAndPotatos():
 
 
 def main():
+	fileName = input("File pls")
 	createArrayOfData()
-	parseBFProgram()
+	parseBFProgram(fileName)
 	meatAndPotatos()
 
 main()
