@@ -6,7 +6,7 @@ BFProgram = ""
 CurrentPosition = 0
 indexIntoString = 0
 fileName = "BFTestProgram.txt"
-approvedSmybols = ["+","-",">","<",".",",","[","]"]
+
 
 def createArrayOfData():
 	for x in range(30000):
@@ -14,6 +14,7 @@ def createArrayOfData():
 	#print(dataPoints)
 
 def parseBFProgram(filename):
+	approvedSmybols = ["+","-",">","<",".",",","[","]"]
 	file = open(filename, "r")
 	global BFProgram
 	for line in file:
@@ -28,7 +29,7 @@ def FindFilesInDir():
 	dir_path = os.path.dirname(os.path.realpath(__file__))
 	for file in os.listdir(dir_path):
 		filenameFor, file_extension = os.path.splitext(os.path.join(dir_path,file))
-		if file_extension == ".b":
+		if file_extension == ".b" or file_extension == ".txt":
 			potFiles.append(file)
 			brainFuckFiles += 1
 	
@@ -41,8 +42,7 @@ def FindFilesInDir():
 	elif brainFuckFiles > 1:
 		print("So, couple of files you might want to run.")
 		print(potFiles)
-		FileNameTemp = input("Which will it be mate?\n")
-		fileName = FileNameTemp.strip(" ")
+		fileName = input("Which will it be mate?\n").strip(" ")
 
 
 def meatAndPotatos():
@@ -101,10 +101,9 @@ def meatAndPotatos():
 
 def main():
 	FindFilesInDir()
-	print(fileName)
 	createArrayOfData()
 	parseBFProgram(fileName)
 	print(BFProgram)
-	#meatAndPotatos()
+	meatAndPotatos()
 
 main()
