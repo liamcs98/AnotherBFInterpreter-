@@ -1,10 +1,12 @@
 #This is going to input either a file of BF, or an input
 import sys
+import os 
 dataPoints = []
 BFProgram = ""
 CurrentPosition = 0
 indexIntoString = 0
-fileName = ""
+fileName = "BFTestProgram.txt"
+approvedSmybols = ["+","-",">","<",".",",","[","]"]
 
 def createArrayOfData():
 	for x in range(30000):
@@ -16,8 +18,31 @@ def parseBFProgram(filename):
 	global BFProgram
 	for line in file:
 		for element in line:
-			BFProgram += element
+			if element in approvedSmybols:
+				BFProgram += element
 
+def FindFilesInDir():
+	global fileName
+	brainFuckFiles = 0
+	potFiles = []
+	dir_path = os.path.dirname(os.path.realpath(__file__))
+	for file in os.listdir(dir_path):
+		filenameFor, file_extension = os.path.splitext(os.path.join(dir_path,file))
+		if file_extension == ".b":
+			potFiles.append(file)
+			brainFuckFiles += 1
+	
+	#Assigning FileName
+	if brainFuckFiles == 1:
+		fileName = potFiles[0]
+	elif brainFuckFiles == 0:
+		print("Want to give me a file?")
+		quit()
+	elif brainFuckFiles > 1:
+		print("So, couple of files you might want to run.")
+		print(potFiles)
+		FileNameTemp = input("Which will it be mate?\n")
+		fileName = FileNameTemp.strip(" ")
 
 
 def meatAndPotatos():
@@ -42,6 +67,7 @@ def meatAndPotatos():
 			sys.stdout.flush()
 		elif element == ",":
 			pass
+		
 		elif element == "[":
 			if dataPoints[CurrentPosition] == 0:
 				indexIntoString += 1
@@ -74,9 +100,11 @@ def meatAndPotatos():
 
 
 def main():
-	fileName = input("File pls")
+	FindFilesInDir()
+	print(fileName)
 	createArrayOfData()
 	parseBFProgram(fileName)
-	meatAndPotatos()
+	print(BFProgram)
+	#meatAndPotatos()
 
 main()
