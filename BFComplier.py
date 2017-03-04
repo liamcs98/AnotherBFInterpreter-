@@ -12,7 +12,6 @@ def createArrayOfData():
 	for x in range(30000):
 		dataPoints.append(0)
 	#print(dataPoints)
-
 def parseBFProgram(filename):
 	approvedSmybols = ["+","-",">","<",".",",","[","]"]
 	file = open(filename, "r")
@@ -21,7 +20,6 @@ def parseBFProgram(filename):
 		for element in line:
 			if element in approvedSmybols:
 				BFProgram += element
-
 def FindFilesInDir():
 	global fileName
 	brainFuckFiles = 0
@@ -31,8 +29,7 @@ def FindFilesInDir():
 		filenameFor, file_extension = os.path.splitext(os.path.join(dir_path,file))
 		if file_extension == ".b" or file_extension == ".txt":
 			potFiles.append(file)
-			brainFuckFiles += 1
-	
+			brainFuckFiles += 1	
 	#Assigning FileName
 	if brainFuckFiles == 1:
 		fileName = potFiles[0]
@@ -43,8 +40,6 @@ def FindFilesInDir():
 		print("So, couple of files you might want to run.")
 		print(potFiles)
 		fileName = input("Which will it be mate?\n").strip(" ")
-
-
 def meatAndPotatos():
 	global BFProgram
 	global indexIntoString
@@ -74,11 +69,11 @@ def meatAndPotatos():
 				howdeep = 1
 				while howdeep != 0:
 					char = BFProgram[indexIntoString]
+					indexIntoString += 1
 					if char =="[":
 						howdeep += 1
 					elif char == "]":
 						howdeep -= 1
-					indexIntoString += 1
 				indexIntoString -= 1
 
 
@@ -88,15 +83,14 @@ def meatAndPotatos():
 				howdeep = 1
 				while howdeep != 0:
 					char = BFProgram[indexIntoString]
+					indexIntoString -= 1
 					if char =="[":
 						howdeep -= 1
 					elif char == "]":
-						howdeep += 1
-					indexIntoString -= 1
+						howdeep += 1	
 				indexIntoString += 1
 
 		indexIntoString += 1
-
 
 
 def main():
